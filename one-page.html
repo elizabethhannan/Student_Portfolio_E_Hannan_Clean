@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elizabeth Hannan — Professional One-Page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+    :root {
+      --accent: #2a6b6b;
+      --accent-dark: #1a3f3f;
+      --ink: #1a1e2e;
+      --muted: #6b7280;
+      --paper: #f3ede0;
+      --warm-white: #faf8f4;
+      --rule: #d8d0c0;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --mono: 'DM Mono', 'Courier New', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--warm-white);
+      color: var(--ink);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* ── Download button (hidden in print) ── */
+    .download-bar {
+      background: var(--accent-dark);
+      padding: 0.65rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .download-bar span {
+      color: rgba(255,255,255,0.55);
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--paper);
+      color: var(--accent-dark);
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.5rem 1.1rem;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .download-btn:hover { background: #fff; transform: translateY(-1px); }
+
+    .back-link {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+    }
+    .back-link:hover { color: #fff; }
+
+    /* ── Page wrapper ── */
+    .page {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #fff;
+      border: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      min-height: 1050px;
+    }
+
+    /* ── LEFT SIDEBAR ── */
+    .sidebar {
+      background: var(--accent-dark);
+      color: #fff;
+      padding: 2rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .sidebar-headshot {
+      width: 150px;
+      height: 200px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.15);
+      flex-shrink: 0;
+    }
+    .sidebar-headshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .sidebar-name {
+      text-align: center;
+    }
+    .sidebar-name h1 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+    .sidebar-name em {
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+    }
+    .sidebar-name p {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-top: 0.4rem;
+      line-height: 1.5;
+    }
+
+    .sidebar-divider {
+      width: 100%;
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .sidebar-section-label {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .qr-row {
+      display: flex;
+      gap: 0.6rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .qr-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .qr-item img {
+      width: 68px;
+      height: 68px;
+      background: #fff;
+      padding: 4px;
+      border-radius: 4px;
+      display: block;
+    }
+    .qr-label {
+      font-family: var(--mono);
+      font-size: 0.45rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+    }
+
+    .linkedin-text {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+      text-align: center;
+      word-break: break-all;
+    }
+
+    .sidebar-tags {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      width: 100%;
+    }
+    .sidebar-tag {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.07);
+      padding: 0.3rem 0.6rem;
+      border-radius: 3px;
+      text-align: center;
+    }
+
+    .sidebar-contact a {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      text-align: center;
+      margin-bottom: 0.2rem;
+    }
+    .sidebar-contact a:hover { color: rgba(255,255,255,0.9); }
+
+    /* ── RIGHT CONTENT ── */
+    .content {
+      padding: 2rem 2.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+    }
+
+    .content-header {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.8rem;
+    }
+    .content-header .kicker {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .content-header h2 {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    .content-header h2 em {
+      color: var(--accent);
+    }
+    .content-header .tagline {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      font-style: italic;
+    }
+
+    .section-block { }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .section-block p {
+      font-size: 0.78rem;
+      color: var(--ink);
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+    }
+    .section-block p:last-child { margin-bottom: 0; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .career-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .career-item {
+      padding: 0.4rem 0.7rem;
+      border-left: 2px solid var(--accent);
+      background: var(--paper);
+      border-radius: 0 4px 4px 0;
+    }
+    .career-item-title {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .career-item-company {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+    }
+
+    .link-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .link-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      line-height: 1.4;
+    }
+    .link-list li::before {
+      content: '→';
+      color: var(--accent);
+      font-size: 0.6rem;
+      flex-shrink: 0;
+    }
+    .link-list a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      transition: color 0.15s;
+    }
+    .link-list a:hover { color: var(--accent); }
+    .link-list .badge {
+      font-family: var(--mono);
+      font-size: 0.45rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(42,107,107,0.1);
+      color: var(--accent);
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .edu-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .edu-list li {
+      font-size: 0.72rem;
+      color: var(--ink);
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.4;
+    }
+    .edu-list li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .goals-row {
+      display: flex;
+      gap: 0.7rem;
+    }
+    .goal-pill {
+      background: var(--accent-dark);
+      color: rgba(255,255,255,0.85);
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.06em;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .career-summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    .career-summary-wide {
+      grid-column: 1 / -1;
+    }
+    .career-summary-item {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      padding: 0.6rem 0.8rem;
+      background: var(--paper);
+      border-radius: 4px;
+      border-left: 2px solid var(--accent);
+    }
+    .career-summary-icon {
+      color: var(--accent);
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .career-summary-title {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+      line-height: 1.3;
+    }
+    .career-summary-desc {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .quote-block {
+      border-left: 3px solid var(--accent);
+      padding: 0.6rem 1rem;
+      background: var(--paper);
+      border-radius: 0 6px 6px 0;
+    }
+    .quote-block p {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.75rem !important;
+      color: var(--ink) !important;
+      line-height: 1.7;
+      margin-bottom: 0 !important;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      .download-bar { display: none !important; }
+      body { background: #fff; }
+      .page {
+        margin: 0;
+        border: none;
+        max-width: 100%;
+        min-height: 100vh;
+      }
+
+      /* Sidebar: background gone in print → switch all text to black */
+      .sidebar { background: none !important; color: #000 !important; border-right: 1px solid #ccc; }
+      .sidebar-name h1,
+      .sidebar-name em,
+      .sidebar-name p,
+      .sidebar-section-label,
+      .qr-label,
+      .linkedin-text,
+      .sidebar-tag,
+      .sidebar-contact a { color: #000 !important; }
+      .sidebar-divider { border-color: #ccc !important; }
+      .sidebar-tag { background: #f0f0f0 !important; }
+
+      /* Goals pills: dark background gone → black text */
+      .goal-pill {
+        background: none !important;
+        color: #000 !important;
+        border: 1px solid #aaa;
+      }
+
+      /* Web-only decorative sections never print */
+      .op-anim-section,
+      .op-carousel-section { display: none !important; }
+    }
+
+    @page {
+      size: letter portrait;
+      margin: 0.4in;
+    }
+  </style>
+</head>
+<body>
+
+<div class="download-bar">
+  <a href="/" class="back-link">← Back to Portfolio</a>
+  <span>Elizabeth Hannan · Professional One-Page · 2026</span>
+  <button class="download-btn" onclick="window.print()">⬇ Download / Print PDF</button>
+</div>
+
+<!-- Web-only: wave animation (does not print) -->
+<div class="op-anim-section">
+  <canvas id="opThreadCanvas"></canvas>
+</div>
+<style>
+  .op-anim-section { background: #f5f2ec; padding: 8px 0 4px; }
+  .op-anim-section canvas { width: 100%; height: 110px; display: block; }
+</style>
+<script>
+(function(){
+  const canvas = document.getElementById('opThreadCanvas');
+  const ctx = canvas.getContext('2d');
+  const cfg = { speedMult: 1, waveDepth: 22, style: 'double', showLabels: 'on' };
+  const NODES = [
+    { t: 0.12, label: 'AI Safety' },
+    { t: 0.28, label: 'HCI' },
+    { t: 0.44, label: 'ESG' },
+    { t: 0.60, label: 'Accessibility' },
+    { t: 0.76, label: 'Writing' },
+    { t: 0.90, label: 'Code' },
+  ];
+  let W = 0, H = 0, startTime = null;
+  const DURATION = 10;
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+  const easeInOutCubic = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+  const easeInOutSine = t => -(Math.cos(Math.PI * t) - 1) / 2;
+  const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+  function hexToRgb(hex){return [parseInt(hex.slice(1,3),16),parseInt(hex.slice(3,5),16),parseInt(hex.slice(5,7),16)];}
+  function rgba(hex,a){const [r,g,b]=hexToRgb(hex);return `rgba(${r},${g},${b},${a})`;}
+  function drawThread(time, xOffset, straight, yCenter, lineColor, lineAlpha, lineWidth) {
+    const margin = W * 0.06, usableW = W - margin * 2, SEGS = 80;
+    ctx.beginPath();
+    for (let i = 0; i <= SEGS; i++) {
+      const xNorm = i / SEGS;
+      const x = margin + xNorm * usableW;
+      const wave =
+        Math.sin(xNorm * Math.PI * 3 + time * 0.8 + xOffset) * cfg.waveDepth +
+        Math.sin(xNorm * Math.PI * 6 + time * 1.3 + xOffset * 1.4) * (cfg.waveDepth * 0.35) +
+        Math.sin(xNorm * Math.PI * 1.2 + time * 0.4 + xOffset * 0.7) * (cfg.waveDepth * 0.5);
+      const edgeFade = Math.min(xNorm * 8, (1 - xNorm) * 8, 1);
+      const organicY = yCenter + wave * edgeFade;
+      const y = organicY + (yCenter - organicY) * straight;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = rgba(lineColor, lineAlpha);
+    ctx.lineWidth = lineWidth; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.stroke();
+  }
+  function drawCrossBridges(time, straight, yA, yB, color, alpha) {
+    const margin = W * 0.06, usableW = W - margin * 2, BRIDGES = 14;
+    const bridgeAlpha = alpha * straight * 0.35;
+    if (bridgeAlpha < 0.01) return;
+    for (let i = 0; i <= BRIDGES; i++) {
+      const xNorm = i / BRIDGES;
+      const x = margin + xNorm * usableW;
+      const edgeFade = Math.min(xNorm * 6, (1 - xNorm) * 6, 1);
+      ctx.beginPath();
+      ctx.moveTo(x, yA); ctx.lineTo(x, yB);
+      ctx.strokeStyle = rgba(color, bridgeAlpha * edgeFade);
+      ctx.lineWidth = 0.8; ctx.stroke();
+    }
+  }
+  function drawTimelineAxis(straight, yCenter, color, alpha) {
+    if (straight < 0.02) return;
+    const margin = W * 0.06, usableW = W - margin * 2;
+    const axisAlpha = alpha * straight;
+    ctx.beginPath();
+    ctx.moveTo(margin, yCenter); ctx.lineTo(margin + usableW, yCenter);
+    ctx.strokeStyle = rgba(color, axisAlpha * 0.18);
+    ctx.lineWidth = 1; ctx.setLineDash([4, 8]); ctx.stroke(); ctx.setLineDash([]);
+  }
+  function drawNodes(time, straight, yCenter, nodeAppear, primaryColor) {
+    if (straight < 0.1 || nodeAppear < 0.01) return;
+    const margin = W * 0.06, usableW = W - margin * 2;
+    NODES.forEach((node, i) => {
+      const x = margin + node.t * usableW;
+      const delay = i / NODES.length * 0.6;
+      const localAppear = clamp((nodeAppear - delay) / 0.4, 0, 1);
+      if (localAppear < 0.01) return;
+      const a = easeOutCubic(localAppear);
+      const pulse = 1 + Math.sin(time * 1.8 + i * 1.1) * 0.12 * straight;
+      ctx.beginPath();
+      ctx.arc(x, yCenter, 7 * pulse * a, 0, Math.PI * 2);
+      ctx.strokeStyle = rgba(primaryColor, 0.25 * a);
+      ctx.lineWidth = 1; ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(x, yCenter, 3 * a, 0, Math.PI * 2);
+      ctx.fillStyle = rgba(primaryColor, 0.75 * a); ctx.fill();
+      if (cfg.showLabels === 'on') {
+        const labelAlpha = a * straight * clamp((nodeAppear - delay - 0.2) / 0.3, 0, 1);
+        if (labelAlpha > 0.01) {
+          ctx.font = `300 9px ui-monospace, SFMono-Regular, Menlo, monospace`;
+          ctx.fillStyle = rgba(primaryColor, labelAlpha * 0.7);
+          ctx.textAlign = 'center';
+          ctx.fillText(node.label.toUpperCase(), x, yCenter - 16);
+        }
+      }
+    });
+  }
+  function drawEndCaps(straight, yCenter, color, alpha) {
+    if (straight < 0.3) return;
+    const margin = W * 0.06, usableW = W - margin * 2;
+    const a = alpha * easeOutCubic(clamp((straight - 0.3) / 0.7, 0, 1));
+    if (a < 0.01) return;
+    ctx.beginPath(); ctx.arc(margin, yCenter, 3, 0, Math.PI * 2);
+    ctx.fillStyle = rgba(color, a * 0.45); ctx.fill();
+    const rx = margin + usableW;
+    ctx.beginPath();
+    ctx.moveTo(rx + 10, yCenter); ctx.lineTo(rx + 4, yCenter - 4); ctx.lineTo(rx + 4, yCenter + 4);
+    ctx.closePath(); ctx.fillStyle = rgba(color, a * 0.45); ctx.fill();
+  }
+  function render(ts) {
+    if (W === 0) resize();
+    if (!startTime) startTime = ts;
+    const elapsed = (ts - startTime) / 1000 * cfg.speedMult;
+    const loopT = (elapsed % DURATION) / DURATION;
+    let straight = 0, nodeAppear = 0, globalAlpha = 1;
+    if (loopT < 0.20) { globalAlpha = easeOutCubic(loopT / 0.20); }
+    else if (loopT < 0.50) { straight = 0; }
+    else if (loopT < 0.72) { straight = easeInOutCubic((loopT - 0.50) / 0.22); }
+    else if (loopT < 0.86) { straight = 1; nodeAppear = easeOutCubic((loopT - 0.72) / 0.14); }
+    else { const p = (loopT - 0.86) / 0.14; straight = 1 - easeInOutCubic(p); nodeAppear = 1 - easeOutCubic(p); globalAlpha = 1 - easeInOutSine(p) * 0.3; }
+    const bgColor = '#f5f2ec', primaryColor = '#1a4a4a', secondColor = '#245151', ruleColor = '#d5cfc5';
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = bgColor; ctx.fillRect(0, 0, W, H);
+    const time = elapsed;
+    const yCentre = H * 0.52;
+    const spread = H * 0.22;
+    const yTop = yCentre - spread, yBot = yCentre + spread;
+    drawThread(time, Math.PI, straight, yCentre, primaryColor, 0.04 * globalAlpha, 18);
+    drawThread(time, 0, straight, yTop, primaryColor, 0.55 * globalAlpha, 1.2);
+    drawThread(time, Math.PI, straight, yBot, secondColor, 0.45 * globalAlpha, 1.0);
+    drawThread(time, Math.PI/2, straight, yCentre, ruleColor, 0.2 * globalAlpha, 0.6);
+    drawCrossBridges(time, straight, yTop, yBot, primaryColor, globalAlpha);
+    drawTimelineAxis(straight, yCentre, primaryColor, globalAlpha);
+    drawEndCaps(straight, yCentre, primaryColor, globalAlpha);
+    drawNodes(time, straight, yCentre, nodeAppear, primaryColor);
+    requestAnimationFrame(render);
+  }
+  window.addEventListener('load', () => { resize(); requestAnimationFrame(render); });
+  window.addEventListener('resize', resize);
+})();
+</script>
+
+<div class="page">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+
+    <div class="sidebar-headshot">
+      <img src="/eh-headshot.png" alt="Elizabeth Hannan">
+    </div>
+
+    <div class="sidebar-name">
+      <h1>Elizabeth<br><em>Hannan</em></h1>
+      <p>AI Researcher<br>AI Safety &amp; Security<br>Non-Traditional Student</p>
+    </div>
+
+    <hr class="sidebar-divider">
+
+    <div style="width:100%">
+      <div class="sidebar-section-label">Scan to Connect</div>
+      <div class="qr-row">
+        <div class="qr-item">
+          <img src="/qr-portfolio.png" alt="Portfolio QR">
+          <span class="qr-label">Portfolio</span>
+        </div>
+        <div class="qr-item">
+          <img src="/qr-linkedin.png" alt="LinkedIn QR">
+          <span class="qr-label">LinkedIn</span>
+        </div>
+      </div>
+      <div class="linkedin-text" style="margin-top:0.6rem;">LinkedIn.com/in/ElizabethHannan</div>
+    </div>
+
+    <hr class="sidebar-divider">
+
+    <div style="width:100%">
+      <div class="sidebar-section-label">Research Focus</div>
+      <div class="sidebar-tags">
+        <span class="sidebar-tag">AI Safety &amp; Security</span>
+        <span class="sidebar-tag">HXO / HCI</span>
+        <span class="sidebar-tag">ESG Transparency</span>
+        <span class="sidebar-tag">Accessibility</span>
+        <span class="sidebar-tag">Adversarial Robustness</span>
+        <span class="sidebar-tag">Sustainability</span>
+        <span class="sidebar-tag">Public Policy &amp; Economics</span>
+      </div>
+    </div>
+
+    <hr class="sidebar-divider">
+
+    <div style="width:100%" class="sidebar-contact">
+      <div class="sidebar-section-label">Contact</div>
+      <a href="mailto:ElizabethHannan@gmail.com">ElizabethHannan@gmail.com</a>
+      <a href="https://e-hannan-career-portfolio.replit.app/" target="_blank">e-hannan-career-portfolio.replit.app</a>
+      <a href="https://github.com/elizabethhannan" target="_blank">github.com/elizabethhannan</a>
+    </div>
+
+  </aside>
+
+  <!-- ── CONTENT ── -->
+  <main class="content">
+
+    <div class="content-header">
+      <div class="kicker">2026 · Student Portfolio · Professional Introduction</div>
+      <h2>AI Researcher · Builder · <em>Polymath</em></h2>
+      <p class="tagline">AAS Sustainable Sciences · BS AI/ML Candidate · PTK Phi Theta Kappa · Nina Mason Pulliam Foundation Scholar</p>
+    </div>
+
+    <!-- Hello -->
+    <div class="section-block">
+      <div class="section-label">Hello</div>
+      <p>Thank you for taking a moment to read this. I am Elizabeth Hannan — a non-traditional student, researcher, and polymath in active transition, deliberately upskilling for an adapted future career at the intersection of AI safety, ESG transparency, and human-centered systems design. I bring eighteen-plus years of executive leadership, entrepreneurism, Fortune 500 collaboration, financial communications, and sustainability finance to the academic work I am producing today.</p>
+      <p>I do not come to this field as an outsider. I come as someone who has led product strategy for Tesla's Supercharger division, directed financial communications at Ellevest (Goldman Sachs), built and scaled companies across IXD, media, and AI enablement, and now applies that lived operational intelligence to research questions that matter: how do AI systems fail, who bears the cost of those failures, and what design principles and governance structures prevent harm at scale?</p>
+    </div>
+
+    <!-- What I see -->
+    <div class="section-block">
+      <div class="section-label">What I See in a Changing Landscape</div>
+      <p>The convergence of AI restructuring, ESG regulatory mandates, and economic disruption is not a future event — it is the operating condition of 2026. Organizations that treat AI adoption as a technical deployment problem rather than a human governance challenge will produce systems that are both unsafe and inequitable. I have watched this pattern from the inside of enterprise technology for nearly two decades, and I am building the research foundation to address it directly. My interests extend beyond my formal degrees into public policy and economics — because sustainable AI adoption requires systemic frameworks, not just better models.</p>
+    </div>
+
+    <!-- HXO -->
+    <div class="section-block">
+      <div class="section-label">HXO Methodology — Human Experience Optimization</div>
+      <p>I developed and have implemented the HXO (Human Experience Optimization) framework across sixteen years of professional practice. HXO is a design methodology that originates with human outcomes — not with features, technologies, or business requirements — and is grounded in psychology and dimensional spatial intelligence. In an AI adoption context, HXO provides the evaluative lens I apply to every system I research and build: <em>does this help or hurt the full spectrum of human experience?</em> It is not a framework I inherited. It is one I built, tested, and refined across enterprise, startup, and academic contexts.</p>
+    </div>
+
+    <!-- Values & Mission -->
+    <div class="section-block">
+      <div class="section-label">Mission &amp; Values</div>
+      <div class="two-col">
+        <div>
+          <p style="font-weight:600;font-size:0.72rem;margin-bottom:0.4rem;">What I Stand For</p>
+          <ul class="edu-list">
+            <li>Open empathy as a design and leadership practice</li>
+            <li>Human governance over AI — systems that retain human authority to recalibrate</li>
+            <li>Sustainability, ESG, and environmental stewardship as structural commitments</li>
+            <li>Accessibility and disability-centered thinking as foundational, not bolted-on</li>
+            <li>Service leadership: leading by elevating others, not directing from above</li>
+            <li>Long-arc thinking for land, ecosystems, and communities</li>
+            <li>Accountability documentation that does not soften uncomfortable findings</li>
+          </ul>
+        </div>
+        <div class="quote-block">
+          <p>"Navigating academia with a physical disability hasn't changed the destination, only the topography of the journey. It instilled a resilience that academia and corporate enterprise could never teach. Every system I research and build is evaluated through one question: does this help or hurt the full spectrum of human experience?"</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Career -->
+    <div class="section-block">
+      <div class="section-label">Professional Background</div>
+      <div class="career-summary-grid">
+        <div class="career-summary-item">
+          <div class="career-summary-icon">◈</div>
+          <div class="career-summary-body">
+            <div class="career-summary-title">Systems Thinker · Outside-In Customer Lens</div>
+            <div class="career-summary-desc">10 years in Tech Corporate Enterprise — leading product strategy, ESG communications, and AI enablement across Fortune 500 clients including Tesla and Verizon.</div>
+          </div>
+        </div>
+        <div class="career-summary-item">
+          <div class="career-summary-icon">◈</div>
+          <div class="career-summary-body">
+            <div class="career-summary-title">Founder · National Digital Agency</div>
+            <div class="career-summary-desc">10 years as Founder and Executive of a national Digital, Data, Design &amp; Development agency — scaling strategy, brand, and technology infrastructure from the ground up, with direct leadership over a team of 75+ employees.</div>
+          </div>
+        </div>
+        <div class="career-summary-item">
+          <div class="career-summary-icon">◈</div>
+          <div class="career-summary-body">
+            <div class="career-summary-title">Technical Translator &amp; Patent-Pending Innovator</div>
+            <div class="career-summary-desc">Translates complex technical concepts into clear, consumable language for any audience. Current patent pending: a guided cognitive retention system for learners in technical topic education.</div>
+          </div>
+        </div>
+        <div class="career-summary-item">
+          <div class="career-summary-icon">◈</div>
+          <div class="career-summary-body">
+            <div class="career-summary-title">Philanthropic Leadership &amp; Conservation</div>
+            <div class="career-summary-desc">20+ years supporting Philanthropic Foundations and micro-philanthropic efforts — with sustained focus on conservation and animal &amp; environmental rights.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Research -->
+    <div class="section-block">
+      <div class="section-label">Research, Projects &amp; Papers</div>
+      <ul class="link-list">
+        <li>
+          <a href="https://e-hannan-career-portfolio.replit.app/publications.html#paper-01">Deaf &amp; DeafBlind Advocacy Research</a>
+          <span class="badge">PTK HiA · Nationally Awarded</span>
+        </li>
+        <li>
+          <a href="https://e-hannan-career-portfolio.replit.app/publications.html#paper-03">Sycophancy by Design — LLM Interface UX Study</a>
+          <span class="badge">Preprint</span>
+        </li>
+        <li>
+          <a href="https://e-hannan-career-portfolio.replit.app/publications.html#paper-02">Adversarial Prompt Taxonomy — AI Safety &amp; Alignment</a>
+          <span class="badge">AI Safety</span>
+        </li>
+        <li>
+          <a href="https://github.com/elizabethhannan/AI4ALL-Diabetes-PRIVATE-ML">GE-79 Cognitive Status Classification — ML &amp; Bias Research</a>
+          <span class="badge">ML · Healthcare AI</span>
+        </li>
+        <li>
+          <a href="https://e-hannan-career-portfolio.replit.app/publications.html#helix-conservatory">Predictive Land Trust Evaluation — Random Forest Conservation Model</a>
+          <span class="badge">ESG · Sustainability</span>
+        </li>
+        <li>
+          <a href="https://wkiva-demo-1-e.vercel.app/">Transparent ESG Algorithm — Live Carbon Intelligence Platform</a>
+          <span class="badge">Live Platform</span>
+        </li>
+        <li>
+          <a href="https://e-hannan-career-portfolio.replit.app/publications.html#philanthropy-documents">Feed A Friend 501(c)3 Launch Document</a>
+          <span class="badge">Philanthropy</span>
+        </li>
+        <li>
+          <a href="https://e-hannan-career-portfolio.replit.app/technical_instruction.html">System Capability &amp; Trust Cards (4-series) — Enterprise AI Documentation</a>
+          <span class="badge">Technical Writing</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Education -->
+    <div class="section-block">
+      <div class="section-label">Education &amp; Affiliations</div>
+      <div class="two-col">
+        <ul class="edu-list">
+          <li>AAS Sustainable Sciences · In Progress</li>
+          <li>BS AI/ML · Candidate</li>
+          <li>Public Policy &amp; Economics · Area of Interest</li>
+          <li>Maricopa Community College Honors Program</li>
+          <li>Maricopa Student Board Role Applicant</li>
+        </ul>
+        <ul class="edu-list">
+          <li>AI4ALL Ignite Fellowship · Cohort Summer 2026</li>
+          <li>PTK Alpha Theta Omicron · VP of Scholarship</li>
+          <li>Nina Mason Pulliam Foundation Merit Scholar</li>
+          <li>PTK Honors in Action · Nationally Awarded</li>
+          <li>Obama Voyager Public Policy Candidate</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2026 Goals -->
+    <div class="section-block">
+      <div class="section-label">2026 Goals</div>
+      <div class="goals-row">
+        <div class="goal-pill">Establish a mentorship relationship with a senior business professional whose work intersects AI, policy, or sustainable finance</div>
+        <div class="goal-pill">Sit on a foundational board or Trust — contributing strategic, HXO-informed, and sustainability-centered perspective</div>
+        <div class="goal-pill">Continue publishing research and building open-source tools at the intersection of AI safety, ESG, and accessibility</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Web-only: logo carousel (does not print) -->
+<div class="op-carousel-section">
+  <span class="op-carousel-label">Enterprise clients &amp; collaborators</span>
+  <div class="op-carousel-inner">
+    <div class="op-logo-track">
+      <span class="op-logo-item">Fortune 500</span><span class="op-logo-item">·</span>
+      <span class="op-logo-item">Enterprise AI</span><span class="op-logo-item">·</span>
+      <span class="op-logo-item">ESG Advisory</span><span class="op-logo-item">·</span>
+      <span class="op-logo-item">Tech Startups</span><span class="op-logo-item">·</span>
+      <span class="op-logo-item">Non-Profits</span><span class="op-logo-item">·</span>
+      <span class="op-logo-item">Academia</span><span class="op-logo-item">·</span>
+      <span class="op-logo-item">Fortune 500</span><span class="op-logo-item">·</span>
+      <span class="op-logo-item">Enterprise AI</span><span class="op-logo-item">·</span>
+      <span class="op-logo-item">ESG Advisory</span><span class="op-logo-item">·</span>
+      <span class="op-logo-item">Tech Startups</span><span class="op-logo-item">·</span>
+      <span class="op-logo-item">Non-Profits</span><span class="op-logo-item">·</span>
+      <span class="op-logo-item">Academia</span>
+    </div>
+  </div>
+</div>
+<style>
+  .op-carousel-section { background: var(--warm-white); padding: 2rem 2rem 1.5rem; border-top: 1px solid var(--rule); }
+  .op-carousel-label { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.9rem; display: block; text-align: center; }
+  .op-carousel-inner { overflow: hidden; }
+  .op-logo-track { display: flex; gap: 2.5rem; animation: op-scroll-logos 28s linear infinite; align-items: center; }
+  .op-logo-item { font-family: var(--mono); font-size: 1.0rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #b0a898; flex-shrink: 0; }
+  @keyframes op-scroll-logos { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+</style>
+
+<script type="module" src="./src/body-copy-size.js"></script>
+</body>
+</html>

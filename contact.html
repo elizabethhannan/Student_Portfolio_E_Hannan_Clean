@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Elizabeth Hannan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f0f0f; --paper: #f5f2ec; --warm-white: #faf8f4;
+      --paper-alt: #ebe5d8;
+      --accent: #2a6b6b; --accent-light: #3d8b8b; --accent-dark: #1a4a4a;
+      --rule: #c8bfb0; --muted: #6b6358;
+      --serif: 'Playfair Display', Georgia, serif;
+      --mono: 'DM Mono', 'Courier New', monospace;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --neu-light: rgba(255,255,255,0.88);
+      --neu-dark: rgba(175,165,148,0.58);
+      --neu-shadow: 6px 6px 14px var(--neu-dark), -6px -6px 14px var(--neu-light);
+      --neu-shadow-sm: 4px 4px 9px var(--neu-dark), -4px -4px 9px var(--neu-light);
+      --neu-pressed: inset 3px 3px 7px var(--neu-dark), inset -3px -3px 7px var(--neu-light);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.7; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* NAV (matches index/publications) */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 3rem; background: var(--paper); backdrop-filter: blur(8px); box-shadow: 0 4px 16px var(--neu-dark), 0 -2px 8px var(--neu-light); }
+    .nav-name { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links > li { position: relative; }
+    .nav-links a { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; font-weight: 700; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links .has-dropdown > a::after { content: ' ▾'; font-size: 0.55rem; opacity: 0.55; margin-left: 0.18rem; }
+    .nav-links .dropdown { position: absolute; top: 100%; left: -0.85rem; padding: 0.55rem 0; margin: 0.45rem 0 0; min-width: 150px; list-style: none; background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 6px 20px rgba(0,0,0,0.06); opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s; z-index: 200; }
+    .nav-links .dropdown::before { content: ''; position: absolute; top: -0.45rem; left: 0; right: 0; height: 0.45rem; }
+    .nav-links .has-dropdown:hover .dropdown,
+    .nav-links .has-dropdown:focus-within .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-links .dropdown li { display: block; }
+    .nav-links .dropdown a { display: block; padding: 0.45rem 1.1rem; white-space: nowrap; font-size: 0.6rem; color: var(--muted); }
+    .nav-links .dropdown a:hover { background: rgba(42,107,107,0.06); color: var(--accent); }
+    .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:0.3rem;width:36px;height:36px;align-items:center;justify-content:center;flex-direction:column;gap:5px;}
+    .nav-toggle span{display:block;width:22px;height:2px;background:var(--muted);transition:transform .25s,opacity .25s;}
+    .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-toggle.open span:nth-child(2){opacity:0;}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    @media(max-width:900px){
+      .nav-toggle{display:flex;}
+      .nav-links{position:fixed;top:54px;left:0;right:0;flex-direction:column;gap:0;background:var(--paper);border-bottom:1px solid var(--rule);box-shadow:0 8px 20px rgba(0,0,0,0.08);padding:0.6rem 1.5rem;display:none !important;z-index:99;max-height:calc(100vh - 54px);overflow-y:auto;}
+      .nav-links.open{display:flex !important;}
+      .nav-links > li{padding:0.65rem 0;border-bottom:1px solid rgba(0,0,0,0.05);width:100%;}
+      .nav-links > li:last-child{border-bottom:none;}
+      .nav-links .dropdown{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:none;background:transparent;padding:0.35rem 0 0 0.8rem;margin:0.3rem 0 0;min-width:0;}
+      .nav-links .has-dropdown > a::after{display:none;}
+    }
+    .social-bar { position: fixed; top: 54px; left: 0; right: 0; z-index: 99; display: flex; align-items: center; justify-content: center; gap: 0.7rem; padding: 0.55rem 2rem; background: rgba(245,242,236,0.97); border-bottom: 1px solid var(--rule); flex-wrap: wrap; }
+    .social-icon { width: 32px; height: 32px; border-radius: 50%; background: var(--paper); box-shadow: var(--neu-shadow-sm); display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--muted); transition: all 0.25s; }
+    .social-icon:hover { box-shadow: var(--neu-pressed); color: var(--accent); }
+    .social-icon svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* HERO */
+    .page-hero { padding: 9rem 3rem 3rem; max-width: 900px; margin: 0 auto; text-align: center; }
+    .page-hero-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
+    .page-hero-title { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.1; margin-bottom: 1.2rem; }
+    .page-hero-title em { font-style: italic; color: var(--accent); }
+    .page-hero-desc { font-size: 0.95rem; color: var(--muted); max-width: 580px; margin: 0 auto; line-height: 1.75; }
+
+    /* FORM */
+    .contact-wrap { max-width: 720px; margin: 0 auto; padding: 2rem 3rem 5rem; flex: 1; width: 100%; }
+    .contact-card { background: var(--paper); border-radius: 16px; padding: 3rem; box-shadow: var(--neu-shadow); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem 1.4rem; }
+    .field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+    .field label .req { color: #b04545; margin-left: 2px; }
+    .field label .opt { color: var(--muted); opacity: 0.6; font-weight: 300; margin-left: 4px; }
+    .field input, .field textarea {
+      font-family: var(--sans); font-size: 0.88rem; color: var(--ink);
+      background: var(--warm-white); border: 1px solid var(--rule); border-radius: 8px;
+      padding: 0.75rem 0.9rem; transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%; font-weight: 300;
+    }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(42,107,107,0.12); }
+    .field textarea { resize: vertical; min-height: 160px; line-height: 1.6; }
+    .field-hint { font-size: 0.72rem; color: var(--muted); line-height: 1.5; margin-top: -0.2rem; }
+    .field-error { font-family: var(--mono); font-size: 0.6rem; color: #b04545; letter-spacing: 0.05em; display: none; }
+    .field.invalid input, .field.invalid textarea { border-color: #b04545; }
+    .field.invalid .field-error { display: block; }
+
+    /* Captcha */
+    .captcha-row { grid-column: 1 / -1; display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; background: var(--warm-white); border: 1px solid var(--rule); border-radius: 8px; flex-wrap: wrap; }
+    .captcha-q { font-family: var(--mono); font-size: 0.78rem; color: var(--ink); }
+    .captcha-q strong { font-family: var(--serif); font-size: 1.05rem; color: var(--accent); margin: 0 0.3rem; }
+    .captcha-row input { width: 90px !important; padding: 0.5rem 0.7rem !important; text-align: center; font-family: var(--mono); }
+    .captcha-refresh { font-family: var(--mono); font-size: 0.6rem; color: var(--accent); background: transparent; border: none; cursor: pointer; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 0.7rem; border-radius: 4px; transition: background 0.2s; }
+    .captcha-refresh:hover { background: rgba(42,107,107,0.08); }
+    .captcha-note { font-size: 0.7rem; color: var(--muted); width: 100%; }
+
+    /* Urgency toggle box */
+    .urgency-box { grid-column: 1 / -1; padding: 1.2rem 1.4rem; background: var(--warm-white); border: 1px solid var(--rule); border-radius: 8px; display: flex; flex-direction: column; gap: 1rem; }
+    .urgency-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .urgency-label { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; color: var(--ink); font-weight: 700; }
+    .urgency-label .sub { display: block; font-family: var(--sans); font-size: 0.72rem; font-weight: 300; color: var(--muted); letter-spacing: 0; text-transform: none; margin-top: 0.2rem; }
+    .switch { position: relative; display: inline-block; width: 54px; height: 28px; flex-shrink: 0; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .switch .slider { position: absolute; cursor: pointer; inset: 0; background-color: #cfc6b3; transition: 0.25s; border-radius: 28px; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.12); }
+    .switch .slider::before { position: absolute; content: ''; height: 22px; width: 22px; left: 3px; top: 3px; background-color: var(--paper); transition: 0.25s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.18); }
+    .switch input:checked + .slider { background-color: var(--accent); }
+    .switch input:checked + .slider::before { transform: translateX(26px); }
+    .urgency-calendar { display: none; flex-direction: column; gap: 0.5rem; padding-top: 0.6rem; border-top: 1px dashed var(--rule); animation: slideDown 0.3s ease; }
+    .urgency-calendar.active { display: flex; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-6px);} to { opacity: 1; transform: translateY(0);} }
+    .urgency-calendar label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+    .urgency-calendar input[type="date"] { font-family: var(--sans); font-size: 0.88rem; color: var(--ink); background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 0.7rem 0.9rem; max-width: 240px; }
+    .urgency-calendar input[type="date"]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(42,107,107,0.12); }
+    .urgency-calendar .hint { font-size: 0.72rem; color: var(--muted); }
+
+    /* LinkedIn connect row */
+    .linkedin-connect { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 0.7rem; padding: 0.95rem 1.2rem; background: var(--warm-white); border: 1px solid var(--rule); border-radius: 8px; text-decoration: none; color: var(--ink); transition: all 0.2s; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+    .linkedin-connect:hover { border-color: #0a66c2; color: #0a66c2; background: #fff; transform: translateY(-1px); box-shadow: var(--neu-shadow-sm); }
+    .linkedin-connect svg { width: 22px; height: 22px; fill: #0a66c2; }
+    .linkedin-connect .ln-sub { font-family: var(--sans); font-size: 0.7rem; font-weight: 300; letter-spacing: 0; text-transform: none; color: var(--muted); margin-left: 0.4rem; }
+
+    /* Submit */
+    .submit-row { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 0.8rem; flex-wrap: wrap; }
+    .submit-btn {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700;
+      color: var(--warm-white); background: var(--accent); border: none; padding: 1rem 2.2rem; border-radius: 8px;
+      cursor: pointer; transition: all 0.25s; box-shadow: var(--neu-shadow-sm);
+    }
+    .submit-btn:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: var(--neu-shadow); }
+    .submit-btn:active { transform: translateY(0); box-shadow: var(--neu-pressed); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .privacy-note { font-size: 0.7rem; color: var(--muted); max-width: 320px; line-height: 1.5; }
+
+    /* Confirmation */
+    .confirmation { display: none; text-align: center; padding: 2rem 1rem; }
+    .confirmation.active { display: block; }
+    .confirmation .check { width: 72px; height: 72px; border-radius: 50%; background: var(--accent); color: var(--warm-white); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: var(--neu-shadow); }
+    .confirmation h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 0.8rem; }
+    .confirmation h2 em { font-style: italic; color: var(--accent); }
+    .confirmation p { font-size: 0.9rem; color: var(--muted); max-width: 480px; margin: 0 auto 1.5rem; line-height: 1.7; }
+    .confirmation .reset-btn { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); background: transparent; border: 1px solid var(--accent); padding: 0.7rem 1.5rem; border-radius: 6px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; margin: 0 0.4rem; }
+    .confirmation .reset-btn:hover { background: var(--accent); color: var(--warm-white); }
+
+    /* Newsletter section */
+    .newsletter-section { background: var(--accent); color: white; text-align: center; padding: 3.5rem 3rem; }
+    .newsletter-section .newsletter-inner { max-width: 700px; margin: 0 auto; }
+    .newsletter-section h2 { font-family: var(--serif); font-size: 1.9rem; font-weight: 400; margin-bottom: 0.7rem; }
+    .newsletter-section p { font-size: 0.88rem; color: rgba(255,255,255,0.7); margin-bottom: 1.8rem; }
+    .newsletter-form { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; max-width: 480px; margin: 0 auto; }
+    .newsletter-input { flex: 1; min-width: 200px; padding: 0.75rem 1rem; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white; font-family: var(--sans); font-size: 0.83rem; outline: none; }
+    .newsletter-input::placeholder { color: rgba(255,255,255,0.5); }
+    .newsletter-submit { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; background: white; color: var(--accent); border: none; padding: 0.75rem 1.4rem; cursor: pointer; transition: opacity 0.2s; }
+    .newsletter-submit:hover { opacity: 0.9; }
+    .newsletter-thanks { display: none; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: white; margin-top: 1rem; }
+    .newsletter-thanks.show { display: block; }
+
+    /* Footer */
+    .site-footer { background: var(--ink); color: var(--paper); padding: 4rem 6rem 2rem; }
+    .site-footer .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 2.5rem; max-width: 1100px; margin-left: auto; margin-right: auto; }
+    .site-footer .footer-name { font-family: var(--serif); font-size: 1.9rem; font-weight: 400; margin-bottom: 0.4rem; }
+    .site-footer .footer-sub { font-family: var(--mono); font-size: calc(0.6rem + 4px); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,242,236,0.35); margin-bottom: 1.3rem; }
+    .site-footer .footer-contact-btn { display: inline-block; font-family: var(--mono); font-size: calc(0.68rem + 4px); letter-spacing: 0.12em; text-transform: uppercase; color: var(--paper); text-decoration: none; border: 1px solid rgba(245,242,236,0.3); padding: 0.55rem 1.3rem; transition: all 0.2s; }
+    .site-footer .footer-contact-btn:hover { background: rgba(245,242,236,0.08); }
+    .site-footer .footer-links { display: flex; flex-direction: column; gap: 0.65rem; align-items: flex-end; padding-top: 0.4rem; }
+    .site-footer .footer-link { font-family: var(--mono); font-size: calc(0.65rem + 4px); letter-spacing: 0.08em; color: rgba(245,242,236,0.5); text-decoration: none; transition: color 0.2s; }
+    .site-footer .footer-link:hover { color: var(--paper); }
+    .site-footer .footer-sig { padding-top: 1.8rem; border-top: 1px solid rgba(245,242,236,0.08); font-family: var(--mono); font-size: calc(0.58rem + 2px); letter-spacing: 0.08em; color: rgba(245,242,236,0.2); text-align: center; max-width: 1100px; margin: 0 auto; }
+
+    @media (max-width: 720px) {
+      nav { padding: 0.9rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-hero { padding: 8rem 1.5rem 2rem; }
+      .contact-wrap { padding: 1.5rem 1.2rem 3rem; }
+      .contact-card { padding: 1.8rem 1.4rem; }
+      .form-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .site-footer { padding: 3rem 1.5rem 2rem; }
+      .site-footer .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .site-footer .footer-links { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">Elizabeth Hannan</a>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open');this.classList.toggle('open');"><span></span><span></span><span></span></button>
+  <ul class="nav-links">
+    <li class="has-dropdown">
+      <a href="publications.html" style="color:var(--accent);font-weight:700;">In Practice</a>
+      <ul class="dropdown">
+        <li><a href="technical_instruction.html">Technical Instruction</a></li>
+      </ul>
+    </li>
+    <li class="has-dropdown">
+      <a href="index.html#polymath">About</a>
+      <ul class="dropdown">
+        <li><a href="index.html#polymath">About</a></li>
+        <li><a href="index.html#education">Education</a></li>
+        <li><a href="contact.html">Get In Touch</a></li>
+      </ul>
+    </li>
+    <li class="has-dropdown">
+      <a href="index.html#research">Works</a>
+      <ul class="dropdown">
+        <li><a href="index.html#research">Research</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="publications.html#recent-papers">Papers</a></li>
+        <li><a href="index.html#philanthropy">Philanthropy</a></li>
+        <li><a href="index.html#code">Code</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#career">Career</a></li>
+  </ul>
+</nav>
+
+<div class="social-bar">
+  <a href="https://github.com/elizabethhannan" target="_blank" class="social-icon" title="GitHub"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.49 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.05.138 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.69.82.57C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg></a>
+  <a href="https://linkedin.com/in/elizabethhannan" target="_blank" class="social-icon" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.24 2.36 4.24 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45C23.21 24 24 23.23 24 22.27V1.73C24 .77 23.21 0 22.22 0z"/></svg></a>
+  <a href="https://www.threads.net/@elizabethhannan" target="_blank" class="social-icon" title="Threads"><svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.02c.03-3.576.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.31-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.781 3.631 2.695 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.749-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.16 8.432c.977-1.45 2.557-2.245 4.435-2.245h.044c3.139.019 5.011 1.953 5.197 5.272.106.045.21.092.314.142 1.46.687 2.529 1.728 3.089 3.012.781 1.794.852 4.717-1.527 7.001-1.812 1.737-3.999 2.539-7.099 2.561h-.025zm-.007-13.41c-.354 0-.713.012-1.078.038-1.836.106-2.974.95-2.872 2.137.107 1.245 1.483 1.825 2.808 1.752 1.218-.066 2.81-.539 3.078-3.674a10.3 10.3 0 0 0-1.936-.253z"/></svg></a>
+  <a href="mailto:ElizabethHannan@gmail.com" class="social-icon" title="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+  <a href="https://scholar.google.com/citations?user=as2WRyMAAAAJ&hl=en" target="_blank" class="social-icon" title="Google Scholar"><svg viewBox="0 0 24 24"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.84 3.37C5.99 10.32 8.79 8.5 12 8.5c3.21 0 6.01 1.82 7.16 4.37L24 9.5 12 0z"/></svg></a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-label">Get in Touch</div>
+  <h1 class="page-hero-title">Contact</h1>
+  <p class="page-hero-desc">For Fellowships, Cohorts, Grants, Private Executive Mentorships, Philanthropy, Family Offices, Trusts, Full-Time Employment, Speaking Opportunities, Scholarships, collaborative research, or aligned conversations — please use the form below. Urgent inquiries are flagged and prioritized.</p>
+</div>
+
+<div class="contact-wrap">
+  <div class="contact-card">
+    <form id="contact-form" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="firstName">First Name <span class="req">*</span></label>
+          <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+          <span class="field-error">Please enter your first name.</span>
+        </div>
+        <div class="field">
+          <label for="lastName">Last Name <span class="req">*</span></label>
+          <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+          <span class="field-error">Please enter your last name.</span>
+        </div>
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+          <span class="field-error">Please enter a valid email.</span>
+        </div>
+        <div class="field">
+          <label for="phone">Phone <span class="req">*</span></label>
+          <input type="tel" id="phone" name="phone" required autocomplete="tel">
+          <span class="field-error">Please enter a phone number.</span>
+        </div>
+        <div class="field full">
+          <label for="linkedin">LinkedIn URL <span class="opt">(optional)</span></label>
+          <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/your-profile" autocomplete="url">
+        </div>
+        <div class="field full">
+          <label for="message">Message <span class="req">*</span></label>
+          <span class="field-hint"><em>What makes this interesting or the opportunity?</em></span>
+          <textarea id="message" name="message" required placeholder="Tell me what makes this interesting or the opportunity..."></textarea>
+          <span class="field-error">Please enter a message.</span>
+        </div>
+
+        <div class="urgency-box">
+          <div class="urgency-row">
+            <span class="urgency-label">Is it urgent?<span class="sub">Toggle on if this needs a time-sensitive response — a calendar will appear so you can suggest a deadline.</span></span>
+            <label class="switch" aria-label="Mark as urgent">
+              <input type="checkbox" id="urgent-toggle">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="urgency-calendar" id="urgency-calendar">
+            <label for="urgent-date">Needed by</label>
+            <input type="date" id="urgent-date" name="urgent-date">
+            <span class="hint">Choose the date you'd like to hear back by. This isn't a guarantee — this is just gathering of data.</span>
+          </div>
+        </div>
+
+        <a href="https://linkedin.com/in/elizabethhannan" target="_blank" rel="noopener" class="linkedin-connect">
+          <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.24 2.36 4.24 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45C23.21 24 24 23.23 24 22.27V1.73C24 .77 23.21 0 22.22 0z"/></svg>
+          Connect on LinkedIn<span class="ln-sub">/ in/elizabethhannan</span>
+        </a>
+
+        <div class="captcha-row field">
+          <span class="captcha-q">Verify you're human: What is <strong id="captcha-a">3</strong> + <strong id="captcha-b">4</strong>?</span>
+          <input type="text" id="captcha-input" inputmode="numeric" autocomplete="off" aria-label="Captcha answer">
+          <button type="button" class="captcha-refresh" id="captcha-refresh">↻ New question</button>
+          <span class="captcha-note">A simple verification step in lieu of third-party tracking.</span>
+          <span class="field-error" style="width:100%;">Incorrect answer — please try again.</span>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="submit-btn" id="submit-btn">Send Message</button>
+          <span class="privacy-note">Your message opens in your email app. No data is stored on this site.</span>
+        </div>
+      </div>
+    </form>
+
+    <div class="confirmation" id="confirmation">
+      <div class="check">✓</div>
+      <h2>Message <em>sent</em>.</h2>
+      <p>Your email client should have opened with your message ready to send. If it didn't, please email <strong>ElizabethHannan@gmail.com</strong> directly. You'll receive a personal response within 3–5 business days.</p>
+      <a href="index.html" class="reset-btn">Back to Home</a>
+      <button type="button" class="reset-btn" id="reset-btn">Send Another</button>
+    </div>
+  </div>
+</div>
+
+<section class="newsletter-section">
+  <div class="newsletter-inner">
+    <h2>Stay in the Research Loop</h2>
+    <p>Join 30,000+ subscribers following work at the intersection of AI Safety, ESG, and Accessibility.</p>
+    <form class="newsletter-form" id="newsletter-form" onsubmit="event.preventDefault(); document.getElementById('newsletter-thanks').classList.add('show'); this.querySelector('input').value=''; return false;">
+      <input type="email" class="newsletter-input" placeholder="your@email.com" required>
+      <button type="submit" class="newsletter-submit">Subscribe</button>
+    </form>
+    <div class="newsletter-thanks" id="newsletter-thanks">✓ Subscribed — check your inbox to confirm.</div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-name">Elizabeth Hannan</div>
+      <div class="footer-sub">Researcher · Builder · Polymath</div>
+      <a href="contact.html" class="footer-contact-btn">Get in Touch</a>
+    </div>
+    <div class="footer-links">
+      <a href="index.html#polymath" class="footer-link">About</a>
+      <a href="index.html#research" class="footer-link">Research</a>
+      <a href="index.html#projects" class="footer-link">Projects</a>
+      <a href="publications.html" class="footer-link">Publications</a>
+      <a href="contact.html" class="footer-link">Contact</a>
+      <a href="https://github.com/elizabethhannan" target="_blank" class="footer-link">GitHub</a>
+      <a href="https://linkedin.com/in/elizabethhannan" target="_blank" class="footer-link">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-sig">© 2025 Elizabeth Hannan · Built with intention · All research cited where applicable</div>
+</footer>
+
+<script>
+(function(){
+  const RECIPIENT = 'ElizabethHannan@gmail.com';
+  let captchaA = 0, captchaB = 0;
+  function newCaptcha(){
+    captchaA = Math.floor(Math.random() * 8) + 2;
+    captchaB = Math.floor(Math.random() * 8) + 2;
+    document.getElementById('captcha-a').textContent = captchaA;
+    document.getElementById('captcha-b').textContent = captchaB;
+    document.getElementById('captcha-input').value = '';
+    document.getElementById('captcha-input').closest('.field').classList.remove('invalid');
+  }
+  document.getElementById('captcha-refresh').addEventListener('click', newCaptcha);
+  newCaptcha();
+
+  // Urgency toggle reveals calendar
+  const urgentToggle = document.getElementById('urgent-toggle');
+  const urgencyCal = document.getElementById('urgency-calendar');
+  const urgentDate = document.getElementById('urgent-date');
+  const today = new Date().toISOString().split('T')[0];
+  urgentDate.min = today;
+  urgentToggle.addEventListener('change', function(){
+    if (this.checked) {
+      urgencyCal.classList.add('active');
+      setTimeout(() => urgentDate.focus(), 200);
+    } else {
+      urgencyCal.classList.remove('active');
+      urgentDate.value = '';
+    }
+  });
+
+  function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    let ok = true;
+    const fields = [
+      {id:'firstName', test: v => v.trim().length > 0},
+      {id:'lastName',  test: v => v.trim().length > 0},
+      {id:'email',     test: isValidEmail},
+      {id:'phone',     test: v => v.trim().replace(/[^\d]/g,'').length >= 7},
+      {id:'message',   test: v => v.trim().length >= 10},
+    ];
+    fields.forEach(f => {
+      const el = document.getElementById(f.id);
+      const wrap = el.closest('.field');
+      if (f.test(el.value)) wrap.classList.remove('invalid');
+      else { wrap.classList.add('invalid'); ok = false; }
+    });
+    const cap = document.getElementById('captcha-input');
+    const capWrap = cap.closest('.field');
+    const capOk = parseInt(cap.value, 10) === (captchaA + captchaB);
+    if (capOk) capWrap.classList.remove('invalid');
+    else { capWrap.classList.add('invalid'); ok = false; }
+    if (!ok) {
+      const firstInvalid = form.querySelector('.field.invalid');
+      if (firstInvalid) firstInvalid.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    const v = id => document.getElementById(id).value.trim();
+    const isUrgent = urgentToggle.checked;
+    const urgentBy = v('urgent-date');
+    const urgencyLabel = isUrgent ? '[URGENT]' : '';
+    const subject = `${urgencyLabel} Contact from ${v('firstName')} ${v('lastName')}`.trim();
+    const linkedinLine = v('linkedin') ? `LinkedIn: ${v('linkedin')}\n` : '';
+    const urgencyLines = isUrgent
+      ? `Urgency: URGENT${urgentBy ? ` — needed by ${urgentBy}` : ''}\n`
+      : `Urgency: standard\n`;
+    const body =
+`Name: ${v('firstName')} ${v('lastName')}
+Email: ${v('email')}
+Phone: ${v('phone')}
+${linkedinLine}${urgencyLines}
+Message:
+${v('message')}
+
+— Sent via elizabethhannan.com contact form`;
+
+    const mailto = `mailto:${RECIPIENT}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+
+    setTimeout(() => {
+      form.style.display = 'none';
+      document.getElementById('confirmation').classList.add('active');
+      window.scrollTo({top: 0, behavior:'smooth'});
+    }, 350);
+  });
+
+  document.getElementById('reset-btn').addEventListener('click', function(){
+    form.reset();
+    form.style.display = '';
+    document.getElementById('confirmation').classList.remove('active');
+    newCaptcha();
+    urgencyCal.classList.remove('active');
+    form.querySelectorAll('.field.invalid').forEach(el => el.classList.remove('invalid'));
+    window.scrollTo({top: 0, behavior:'smooth'});
+  });
+})();
+</script>
+
+<script type="module" src="./src/body-copy-size.js"></script>
+</body>
+</html>

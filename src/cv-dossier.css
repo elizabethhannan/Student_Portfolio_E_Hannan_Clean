@@ -1,0 +1,451 @@
+.cv-dossier {
+  --dossier-paper: #f1ede4;
+  --dossier-ink: #142033;
+  --dossier-muted: #68716f;
+  --dossier-rule: rgba(20, 32, 51, .16);
+  --dossier-teal: #47796f;
+  --dossier-pale: #e4e8df;
+  position: relative;
+  overflow: hidden;
+  background: var(--dossier-paper);
+  color: var(--dossier-ink);
+  scroll-margin-top: 150px;
+}
+
+.cv-dossier::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .36;
+  background-image: repeating-linear-gradient(0deg, transparent 0 5px, rgba(35, 45, 48, .018) 6px);
+}
+
+.cv-dossier .cv-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 7vw, 6.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+.cv-dossier .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.cv-dossier .cv-layout {
+  display: grid;
+  grid-template-columns: minmax(0, .84fr) minmax(0, 1.16fr);
+  gap: clamp(2rem, 6vw, 5.5rem);
+  align-items: start;
+}
+
+.cv-dossier .cv-intro { padding-top: .35rem; }
+.cv-dossier .cv-kicker {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  margin-bottom: 1.45rem;
+  color: var(--dossier-teal);
+  font: 400 .72rem/1.45 var(--mono, "DM Mono", monospace);
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+.cv-dossier .cv-kicker::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+}
+.cv-dossier .cv-heading {
+  max-width: 540px;
+  margin: 0;
+  font: 400 clamp(2.6rem, 5.2vw, 4.5rem)/.99 var(--serif, "Playfair Display", Georgia, serif);
+  letter-spacing: -.045em;
+}
+.cv-dossier .cv-heading em { color: var(--dossier-teal); font-weight: 400; }
+.cv-dossier .cv-deck {
+  max-width: 440px;
+  margin: 1.4rem 0 1.55rem;
+  color: #4f5d5e;
+  font: 400 1.12rem/1.72 var(--sans, "DM Sans", sans-serif);
+}
+.cv-dossier .cv-ready {
+  max-width: 440px;
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--dossier-teal);
+  font: italic 1.08rem/1.68 var(--serif, "Playfair Display", Georgia, serif);
+}
+.cv-dossier .cv-privacy {
+  max-width: 440px;
+  display: flex;
+  gap: .65rem;
+  align-items: flex-start;
+  margin-top: 1.35rem;
+  color: var(--dossier-muted);
+  font: 400 .76rem/1.65 var(--mono, "DM Mono", monospace);
+}
+.cv-dossier .cv-privacy-mark {
+  width: 14px;
+  height: 14px;
+  margin-top: .12rem;
+  flex: 0 0 auto;
+  color: var(--dossier-teal);
+}
+
+.cv-dossier .cv-panel {
+  border: 1px solid rgba(20, 32, 51, .2);
+  background: rgba(250, 248, 242, .82);
+  box-shadow: 10px 12px 28px rgba(37, 43, 43, .09), -5px -5px 16px rgba(255, 255, 255, .52);
+}
+.cv-dossier .cv-panel-head {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  padding: 1.2rem 1.45rem;
+  border-bottom: 1px solid var(--dossier-rule);
+}
+.cv-dossier .cv-mark {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--dossier-ink);
+  color: #f6f2e8;
+  font: italic 1.05rem var(--serif, Georgia, serif);
+}
+.cv-dossier .cv-panel-title {
+  margin: 0;
+  font: 600 .96rem/1.45 var(--sans, "DM Sans", sans-serif);
+}
+.cv-dossier .cv-panel-subtitle {
+  margin: .12rem 0 0;
+  color: var(--dossier-muted);
+  font: 400 .8rem/1.55 var(--mono, "DM Mono", monospace);
+  letter-spacing: .04em;
+}
+.cv-dossier .cv-live {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  margin-left: auto;
+  color: var(--dossier-teal);
+  font: 400 .66rem var(--mono, monospace);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.cv-dossier .cv-reset {
+  min-height: 36px;
+  padding: .35rem .65rem;
+  border: 1px solid rgba(20, 32, 51, .2);
+  background: transparent;
+  color: var(--dossier-muted);
+  font: 400 .68rem var(--mono, monospace);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+.cv-dossier .cv-reset:hover {
+  border-color: var(--dossier-teal);
+  background: var(--dossier-pale);
+  color: var(--dossier-ink);
+}
+.cv-dossier .cv-live::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.cv-dossier .cv-conversation {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 205px;
+  max-height: 430px;
+  overflow-y: auto;
+  padding: 1.35rem 1.45rem 1rem;
+  scroll-behavior: smooth;
+}
+.cv-dossier .cv-message {
+  max-width: 92%;
+  padding: .95rem 1.1rem;
+  animation: cv-arrive .32s ease both;
+}
+.cv-dossier .cv-message-assistant {
+  align-self: flex-start;
+  background: #e9e6dc;
+  color: #354144;
+  border-left: 2px solid var(--dossier-teal);
+}
+.cv-dossier .cv-message-user {
+  align-self: flex-end;
+  background: var(--dossier-ink);
+  color: #f5f2ea;
+}
+.cv-dossier .cv-message-label {
+  display: block;
+  margin-bottom: .22rem;
+  color: var(--dossier-teal);
+  font: 400 .66rem/1.5 var(--mono, monospace);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.cv-dossier .cv-message-user .cv-message-label { color: #aac7bb; }
+.cv-dossier .cv-message-copy {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: 400 1rem/1.72 var(--sans, sans-serif);
+}
+.cv-dossier .cv-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem .7rem;
+  margin-top: .65rem;
+  padding-top: .55rem;
+  border-top: 1px solid rgba(20, 32, 51, .13);
+}
+.cv-dossier .cv-sources-label {
+  flex-basis: 100%;
+  color: var(--dossier-muted);
+  font: 400 .66rem var(--mono, monospace);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.cv-dossier .cv-source {
+  color: #37675e;
+  font: 400 .76rem/1.5 var(--mono, monospace);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+.cv-dossier .cv-source:hover { color: var(--dossier-ink); }
+
+.cv-dossier .cv-loading {
+  align-self: flex-start;
+  display: flex;
+  gap: .3rem;
+  align-items: center;
+  padding: .85rem 1rem;
+  background: #e9e6dc;
+}
+.cv-dossier .cv-loading span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--dossier-teal);
+  animation: cv-pulse 1s ease-in-out infinite alternate;
+}
+.cv-dossier .cv-loading span:nth-child(2) { animation-delay: .16s; }
+.cv-dossier .cv-loading span:nth-child(3) { animation-delay: .32s; }
+.cv-dossier .cv-error {
+  margin: 0 1.45rem 1rem;
+  padding: .7rem .85rem;
+  border-left: 2px solid #9a594d;
+  background: #f2e7df;
+  color: #633c34;
+  font: 400 .86rem/1.6 var(--sans, sans-serif);
+}
+.cv-dossier .cv-error button {
+  display: inline;
+  margin-left: .45rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #633c34;
+  font: 600 .76rem var(--mono, monospace);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.cv-dossier .cv-suggestions {
+  padding: .25rem 1.45rem 1.15rem;
+}
+.cv-dossier .cv-suggestions-label {
+  margin-bottom: .55rem;
+  color: #8a887e;
+  font: 400 .66rem var(--mono, monospace);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.cv-dossier .cv-prompt-list { display: flex; flex-wrap: wrap; gap: .45rem; }
+.cv-dossier .cv-prompt {
+  min-height: 44px;
+  padding: .62rem .78rem;
+  border: 1px solid rgba(20, 32, 51, .19);
+  background: transparent;
+  color: #4b5c5b;
+  text-align: left;
+  font: 400 .86rem/1.5 var(--sans, sans-serif);
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.cv-dossier .cv-prompt:hover:not(:disabled) {
+  border-color: var(--dossier-teal);
+  background: var(--dossier-pale);
+  color: var(--dossier-ink);
+}
+.cv-dossier .cv-prompt:disabled { opacity: .55; cursor: wait; }
+.cv-dossier .cv-compose {
+  display: flex;
+  align-items: stretch;
+  gap: .55rem;
+  padding: .9rem 1rem;
+  border-top: 1px solid var(--dossier-rule);
+  background: rgba(234, 230, 220, .5);
+}
+.cv-dossier .cv-input {
+  width: 100%;
+  min-height: 52px;
+  resize: vertical;
+  max-height: 130px;
+  padding: .82rem .9rem;
+  border: 1px solid rgba(20, 32, 51, .22);
+  border-radius: 0;
+  outline: 0;
+  background: rgba(255, 254, 249, .78);
+  color: var(--dossier-ink);
+  font: 400 .96rem/1.55 var(--sans, sans-serif);
+}
+.cv-dossier .cv-input::placeholder { color: #8c918a; }
+.cv-dossier .cv-input:focus { border-color: var(--dossier-teal); box-shadow: 0 0 0 2px rgba(71, 121, 111, .12); }
+.cv-dossier .cv-send {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  flex: 0 0 52px;
+  border: 0;
+  background: var(--dossier-teal);
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.cv-dossier .cv-send:hover:not(:disabled) { background: #315f58; transform: translateY(-1px); }
+.cv-dossier .cv-send:disabled { opacity: .48; cursor: wait; }
+.cv-dossier .cv-send svg { width: 20px; height: 20px; }
+.cv-dossier :focus-visible { outline: 2px solid var(--dossier-teal); outline-offset: 3px; }
+.cv-dossier .cv-wave {
+  position: absolute;
+  right: -2%;
+  bottom: -3px;
+  width: 55%;
+  height: 42px;
+  opacity: .34;
+  pointer-events: none;
+}
+.cv-dossier .cv-wave path {
+  fill: none;
+  stroke: var(--dossier-teal);
+  stroke-width: 1;
+  stroke-dasharray: 7 8;
+  animation: cv-drift 26s linear infinite;
+}
+
+/* Homepage dossier follows the dark navy section 07; the publications copy stays parchment. */
+.cv-dossier.cv-dossier--navy {
+  --dossier-paper: #0f1829;
+  --dossier-ink: #f5f2ec;
+  --dossier-muted: #aab5c6;
+  --dossier-rule: rgba(255, 255, 255, .14);
+  --dossier-teal: #7ec8e3;
+  --dossier-pale: #1a2a43;
+  background: var(--dossier-paper);
+}
+.cv-dossier.cv-dossier--navy::before {
+  opacity: .12;
+  background-image: repeating-linear-gradient(0deg, transparent 0 5px, rgba(126, 200, 227, .035) 6px);
+}
+.cv-dossier--navy .cv-deck { color: rgba(255, 255, 255, .72); }
+.cv-dossier--navy .cv-panel {
+  border-color: rgba(255, 255, 255, .14);
+  background: #111e32;
+  box-shadow: 10px 12px 28px rgba(0, 0, 0, .24), -5px -5px 16px rgba(66, 100, 138, .06);
+}
+.cv-dossier--navy .cv-mark {
+  background: var(--dossier-teal);
+  color: #0f1829;
+}
+.cv-dossier--navy .cv-reset {
+  border-color: rgba(255, 255, 255, .24);
+  color: rgba(255, 255, 255, .72);
+}
+.cv-dossier--navy .cv-reset:hover {
+  border-color: var(--dossier-teal);
+  background: rgba(126, 200, 227, .12);
+  color: #fff;
+}
+.cv-dossier--navy .cv-message-assistant,
+.cv-dossier--navy .cv-loading {
+  background: #17243a;
+  color: #e6ebf2;
+}
+.cv-dossier--navy .cv-message-user {
+  background: #233550;
+  color: #f5f2ec;
+}
+.cv-dossier--navy .cv-message-user .cv-message-label { color: var(--dossier-teal); }
+.cv-dossier--navy .cv-sources { border-top-color: rgba(255, 255, 255, .15); }
+.cv-dossier--navy .cv-source { color: var(--dossier-teal); }
+.cv-dossier--navy .cv-error {
+  border-left-color: #d98b7f;
+  background: rgba(169, 92, 79, .14);
+  color: #f2c9c3;
+}
+.cv-dossier--navy .cv-error button { color: #f2c9c3; }
+.cv-dossier--navy .cv-suggestions-label { color: rgba(255, 255, 255, .52); }
+.cv-dossier--navy .cv-prompt {
+  border-color: rgba(255, 255, 255, .23);
+  color: rgba(255, 255, 255, .82);
+}
+.cv-dossier--navy .cv-prompt:hover:not(:disabled) {
+  background: #1a2a43;
+  color: #fff;
+}
+.cv-dossier--navy .cv-compose { background: rgba(7, 15, 29, .28); }
+.cv-dossier--navy .cv-input {
+  border-color: rgba(255, 255, 255, .24);
+  background: #0c1525;
+  color: #f5f2ec;
+}
+.cv-dossier--navy .cv-input::placeholder { color: rgba(255, 255, 255, .52); }
+.cv-dossier--navy .cv-input:focus { box-shadow: 0 0 0 2px rgba(126, 200, 227, .18); }
+.cv-dossier--navy .cv-send {
+  background: var(--dossier-teal);
+  color: #0f1829;
+}
+.cv-dossier--navy .cv-send:hover:not(:disabled) { background: #9bd7eb; }
+
+@keyframes cv-arrive { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cv-pulse { from { opacity: .35; transform: translateY(0); } to { opacity: 1; transform: translateY(-3px); } }
+@keyframes cv-drift { to { stroke-dashoffset: -180; } }
+@media (max-width: 760px) {
+  .cv-dossier .cv-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .cv-dossier .cv-heading { max-width: 600px; }
+  .cv-dossier .cv-conversation { min-height: 180px; }
+  .cv-dossier .cv-panel-head,
+  .cv-dossier .cv-suggestions { padding-right: 1rem; padding-left: 1rem; }
+  .cv-dossier .cv-conversation { padding-right: 1rem; padding-left: 1rem; }
+  .cv-dossier .cv-compose { padding: .8rem; }
+  .cv-dossier .cv-input { min-height: 72px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cv-dossier *, .cv-dossier *::before, .cv-dossier *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}

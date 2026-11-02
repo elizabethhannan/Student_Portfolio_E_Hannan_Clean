@@ -1,0 +1,76 @@
+<section class="speaking-section" id="speaking" aria-labelledby="speaking-heading">
+  <div class="section-inner">
+    <div class="speaking-panel">
+      <div>
+        <p class="speaking-label">Speaking &amp; Events</p>
+        <h2 class="speaking-title" id="speaking-heading">Bring the conversation into the room.</h2>
+      </div>
+      <div class="speaking-details">
+        <p class="speaking-copy">For speaking opportunities, collaborative research, or aligned conversations at the intersection of AI safety, ESG, and accessibility, get in touch.</p>
+        <a class="speaking-link" href="contact.html">Discuss a speaking opportunity <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="speaking-event">
+        <div class="speaking-event-copy">
+          <p class="speaking-event-eyebrow">Latest Speaking Event:</p>
+          <h3 class="speaking-event-title">Fireside Panel: Designed by Humans; Decided by Machines</h3>
+          <ul class="speaking-event-list">
+            <li><strong>Summit</strong><span>2026 National Summit on Artificial Intelligence</span></li>
+            <li><strong>Consortium</strong><span>National Applied AI Consortium (NAAIC)</span></li>
+            <li><strong>Organizations</strong><span>Maricopa Community Colleges · National Applied AI Consortium</span></li>
+            <li><strong>Role</strong><span>Moderator: Elizabeth Hannan</span></li>
+          </ul>
+        </div>
+        <div class="speaking-video-panel" data-speaking-player>
+          <h3 class="speaking-video-title">Fireside Summary:</h3>
+          <div class="speaking-video-frame">
+            <video class="speaking-video" id="naaic-fireside-video" preload="metadata" playsinline controls poster="/naaic-fireside-poster.png" aria-label="Recording of the Fireside Panel: Designed by Humans; Decided by Machines">
+              <source src="/naaic-fireside-panel.mp4" type="video/mp4">
+              <track kind="captions" src="/naaic-fireside-panel.vtt" srclang="en" label="English captions" default>
+              Your browser does not support video playback. <a href="/naaic-fireside-panel.mp4">Open the recording</a>.
+            </video>
+          </div>
+          <div class="speaking-video-actions">
+            <button class="speaking-video-stop" type="button" data-video-stop aria-controls="naaic-fireside-video">Stop</button>
+            <p class="speaking-video-status" data-video-status role="status" aria-live="polite">Ready to play</p>
+          </div>
+          <div class="speaking-video-links">
+            <a class="speaking-video-link" href="/naaic-fireside-panel.mp4" target="_blank" rel="noopener noreferrer">Open recording in a new tab ↗</a>
+            <a class="speaking-video-link" href="/naaic-fireside-panel.vtt">English captions (.vtt) ↗</a>
+            <a class="speaking-video-link" href="/naaic-fireside-transcript.html">Read the transcript ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll("[data-speaking-player]").forEach((player) => {
+    const video = player.querySelector("video");
+    const status = player.querySelector("[data-video-status]");
+    const stopButton = player.querySelector("[data-video-stop]");
+    if (!video || !status || !stopButton) return;
+
+    stopButton.addEventListener("click", () => {
+      video.pause();
+      try {
+        video.currentTime = 0;
+      } catch {
+        // The video returns to the start as soon as its metadata is available.
+      }
+      status.textContent = "Stopped — ready to play";
+    });
+    video.addEventListener("play", () => {
+      status.textContent = "Playing";
+    });
+    video.addEventListener("pause", () => {
+      if (!video.ended && video.currentTime > 0) status.textContent = "Paused";
+    });
+    video.addEventListener("ended", () => {
+      status.textContent = "Playback complete";
+    });
+    video.addEventListener("error", () => {
+      status.textContent = "The recording could not be loaded";
+    });
+  });
+</script>
